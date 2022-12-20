@@ -9,13 +9,13 @@ public class App
     public static void main( String[] args )
     {
 //                      findById
-        /*try{
+        try{
             CityDaoJDBC cityDaoJDBC = new CityDaoJDBC();
             cityDaoJDBC.findById(3048);
         } catch(DBConnectionException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
-        }*/
+        }
         //-----------------------------------------------------
         
 //                       findByCode
@@ -71,14 +71,14 @@ public class App
         //-----------------------------------------------------
     
 //                  delete
-        City city = new City("Test_Name","NLD", "Test_District", 10);
+        /*City city = new City("Test_Name","NLD", "Test_District", 10);
         try{
             CityDaoJDBC cityDaoJDBC = new CityDaoJDBC();
             cityDaoJDBC.delete(city);
         } catch(DBConnectionException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
-        }
+        }*/
         
     }//main
 }//class
