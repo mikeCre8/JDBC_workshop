@@ -16,6 +16,7 @@ public class CityDaoJDBC implements CityDao {
     
         @Override
         public City findById ( int id ){
+        
         String query = "select * from city where id = ?";
         
         int cityId = 3048;
@@ -45,6 +46,7 @@ public class CityDaoJDBC implements CityDao {
         
         @Override
         public List<City> findByCode ( String code ){
+        
             List<City> list = new ArrayList<>();
             String query = "select * from city where CountryCode = ?";
             
@@ -75,6 +77,7 @@ public class CityDaoJDBC implements CityDao {
         
         @Override
         public List<City> findByName ( String name ){
+        
             List<City> list = new ArrayList<>();
             String query = "select * from city where name = ?";
     
@@ -106,6 +109,7 @@ public class CityDaoJDBC implements CityDao {
         
         @Override
         public List<City> findAll ( ) {
+        
         List<City> list = new ArrayList<>();
                 String query = "select * from city";
         
@@ -134,40 +138,33 @@ public class CityDaoJDBC implements CityDao {
 //        Todo
         @Override
         public City add ( City city ){
-        String queryCity = "insert into city(Name, CountryCode, District, Population) values (?,?,?,?)";
-        String queryCountry = "insert into country (Code) values (?) where CountryCode = ?";
-        
+    
+            String queryCity = "insert into city (Name, CountryCode, District, Population) values (?,?,?,?)";
+            
         try(
                 Connection connection = MySQLConnection.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(queryCity);
+                PreparedStatement preparedStatementCity = connection.prepareStatement(queryCity, Statement.RETURN_GENERATED_KEYS);
         ) {
+            preparedStatementCity.setString(1, "Test_Name");
+            preparedStatementCity.setString(2, "TST");
+            preparedStatementCity.setString(3, "Test_District");
+            preparedStatementCity.setInt(4, 1);
             
-            connection.setAutoCommit(false);
-            
-            preparedStatement.setString(1, "Test_Name");
-            preparedStatement.setString(2, "TST");
-            preparedStatement.setString(3, "Test_District");
-            preparedStatement.setInt(4, 1);
-            
-            int newCity = preparedStatement.executeUpdate();
+            int newCity = preparedStatementCity.executeUpdate(queryCity);
             System.out.println(newCity + " added");
             
-            try(
-                    PreparedStatement preparedStatementCountry = connection.prepareStatement(queryCountry)
+            try (
+                    ResultSet resultSet = preparedStatementCity.getGeneratedKeys()
                     ){
-                
-                preparedStatementCountry.setString(1, "TST");
-                
-                preparedStatementCountry.executeUpdate();
+                if(resultSet.next()){
+                    System.out.println("City ID is: " + resultSet.getInt(1));
+                }
             }
-            
-            connection.commit();
             
         } catch(DBConnectionException | SQLException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        
         return city;
     }
         

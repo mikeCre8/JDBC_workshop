@@ -49,7 +49,7 @@ public class App
         //-----------------------------------------------------
     
 //                      add
-        City city = new City("TestName","T", "TestDistrict", 1);
+        City city = new City("Test_Name","TST", "Test_District", 1);
         try{
             CityDaoJDBC cityDaoJDBC = new CityDaoJDBC();
             cityDaoJDBC.add(city);
