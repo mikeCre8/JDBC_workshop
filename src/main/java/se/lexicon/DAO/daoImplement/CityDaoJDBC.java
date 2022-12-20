@@ -152,7 +152,7 @@ public class CityDaoJDBC implements CityDao {
             preparedStatementCity.setInt(4, 10);
             
             int newCity = preparedStatementCity.executeUpdate();
-            System.out.println(newCity + " added");
+            System.out.println(newCity + " row added");
             
             try (
                     ResultSet resultSet = preparedStatementCity.getGeneratedKeys()
@@ -182,7 +182,7 @@ public class CityDaoJDBC implements CityDao {
                 preparedStatement.setInt(1, cityId);
     
                 int rowAffected = preparedStatement.executeUpdate();
-                System.out.println(rowAffected + " updated!");
+                System.out.println(rowAffected + " row updated!");
                 
             } catch(DBConnectionException | SQLException e) {
                 System.out.println(e.getMessage());
@@ -193,7 +193,7 @@ public class CityDaoJDBC implements CityDao {
         
         @Override
         public City delete ( City city ){
-        int cityId = 2;
+        int cityId = 4091;
         String query = "delete from city where id = ?";
         
         try(
@@ -204,7 +204,7 @@ public class CityDaoJDBC implements CityDao {
             preparedStatement.setInt(1, cityId);
     
             int rowAffected = preparedStatement.executeUpdate();
-            System.out.println(rowAffected);
+            System.out.println(rowAffected + " row deleted!");
     
         } catch(DBConnectionException | SQLException e) {
             System.out.println(e.getMessage());

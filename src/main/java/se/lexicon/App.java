@@ -60,10 +60,21 @@ public class App
         //-----------------------------------------------------
         
 //                      update
-        City city = new City("Test_Name","NLD", "Test_District", 10);
+        /*City city = new City("Test_Name","NLD", "Test_District", 10);
         try{
             CityDaoJDBC cityDaoJDBC = new CityDaoJDBC();
             cityDaoJDBC.update(city);
+        } catch(DBConnectionException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }*/
+        //-----------------------------------------------------
+    
+//                  delete
+        City city = new City("Test_Name","NLD", "Test_District", 10);
+        try{
+            CityDaoJDBC cityDaoJDBC = new CityDaoJDBC();
+            cityDaoJDBC.delete(city);
         } catch(DBConnectionException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
