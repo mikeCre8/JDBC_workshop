@@ -135,29 +135,30 @@ public class CityDaoJDBC implements CityDao {
         
         return list;
     }
-//        Todo
+//        Todo add
         @Override
         public City add ( City city ){
+            System.out.println("city = " + city);
     
-            String queryCity = "insert into city (Name, CountryCode, District, Population) values (?,?,?,?)";
+            String queryCity = "insert into city(Name, CountryCode, District, Population) values (?,?,?,?)";
             
         try(
                 Connection connection = MySQLConnection.getConnection();
                 PreparedStatement preparedStatementCity = connection.prepareStatement(queryCity, Statement.RETURN_GENERATED_KEYS);
         ) {
             preparedStatementCity.setString(1, "Test_Name");
-            preparedStatementCity.setString(2, "TST");
+            preparedStatementCity.setString(2, "NLD");
             preparedStatementCity.setString(3, "Test_District");
             preparedStatementCity.setInt(4, 1);
             
-            int newCity = preparedStatementCity.executeUpdate(queryCity);
+            int newCity = preparedStatementCity.executeUpdate();
             System.out.println(newCity + " added");
             
             try (
                     ResultSet resultSet = preparedStatementCity.getGeneratedKeys()
                     ){
                 if(resultSet.next()){
-                    System.out.println("City ID is: " + resultSet.getInt(1));
+                    city.setId(resultSet.getInt(1));
                 }
             }
             
@@ -167,7 +168,7 @@ public class CityDaoJDBC implements CityDao {
         }
         return city;
     }
-        
+    
         @Override
         public City update ( City city ){
             int cityId = 1;
