@@ -149,7 +149,7 @@ public class CityDaoJDBC implements CityDao {
             preparedStatementCity.setString(1, "Test_Name");
             preparedStatementCity.setString(2, "NLD");
             preparedStatementCity.setString(3, "Test_District");
-            preparedStatementCity.setInt(4, 1);
+            preparedStatementCity.setInt(4, 10);
             
             int newCity = preparedStatementCity.executeUpdate();
             System.out.println(newCity + " added");
@@ -171,23 +171,18 @@ public class CityDaoJDBC implements CityDao {
     
         @Override
         public City update ( City city ){
-            int cityId = 1;
-            String query = "update city set(Name, CountryCode, District, Population) values (?,?,?,?) where id = ?";
+            int cityId = 4090;
+            String query = "update city set Population = 20 where id = ?";
             
             try (
                     Connection connection = MySQLConnection.getConnection();
                     PreparedStatement preparedStatement = connection.prepareStatement(query);
                 ) {
-                preparedStatement.setString(1, "Test_Name_Updated");
-                preparedStatement.setString(2, "xxx");
-                preparedStatement.setString(3, "Test_District_Updated");
-                preparedStatement.setInt(4, 2);
+                
                 preparedStatement.setInt(1, cityId);
     
                 int rowAffected = preparedStatement.executeUpdate();
-                System.out.println(rowAffected);
-    
-                
+                System.out.println(rowAffected + " updated!");
                 
             } catch(DBConnectionException | SQLException e) {
                 System.out.println(e.getMessage());
