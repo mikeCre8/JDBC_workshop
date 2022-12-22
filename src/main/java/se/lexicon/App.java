@@ -10,12 +10,12 @@ public class App
         CityDaoJDBC cityDaoJDBC = new CityDaoJDBC();
         
             cityDaoJDBC.findById(3048);
-            cityDaoJDBC.findByCode("SWE");
+            /*cityDaoJDBC.findByCode("SWE");
             cityDaoJDBC.findByName("Stockholm");
             cityDaoJDBC.findAll();
             cityDaoJDBC.add(new City("Test_Name","NLD", "Test_District", 1));
-            cityDaoJDBC.update(new City("Test_Name","NLD", "Test_District", 10));
-            cityDaoJDBC.delete(new City("Test_Name","NLD", "Test_District", 10));
+            cityDaoJDBC.update(new City(4080,"Test_Name","NLD", "Test_District", 10));
+            cityDaoJDBC.delete(new City(4080,"Test_Name","NLD", "Test_District", 10));*/
         
         
     }//main

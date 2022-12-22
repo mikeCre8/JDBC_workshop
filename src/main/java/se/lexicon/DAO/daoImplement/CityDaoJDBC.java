@@ -11,29 +11,25 @@ import java.util.List;
 
 public class CityDaoJDBC implements CityDao {
     
-    public CityDaoJDBC() {
-    }
-    
-        @Override
+    @Override
         public City findById ( int id ){
         
         String query = "select * from city where id = ?";
         
-        int cityId = 3048;
         try(
                 Connection connection = MySQLConnection.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)
                 ) {
             
-            preparedStatement.setInt(1, cityId);
+            preparedStatement.setInt(1, 3048);
             
             try (ResultSet resultSet = preparedStatement.executeQuery();) {
                 while (resultSet.next()) {
-                    System.out.println(resultSet.getInt("ID"));
-                    System.out.println(resultSet.getString("Name"));
-                    System.out.println(resultSet.getString("CountryCode"));
-                    System.out.println(resultSet.getString("District"));
-                    System.out.println(resultSet.getString("Population"));
+                    System.out.println(resultSet.getInt("ID") +"\n"+
+                            resultSet.getString("Name") +"\n"+
+                            resultSet.getString("CountryCode") +"\n"+
+                            resultSet.getString("District") +"\n"+
+                            resultSet.getString("Population"));
                     System.out.println();
                 }
             }
@@ -54,16 +50,16 @@ public class CityDaoJDBC implements CityDao {
                     Connection connection = MySQLConnection.getConnection();
                     PreparedStatement preparedStatement = connection.prepareStatement(query)
                     ) {
-                preparedStatement.setString(1, "SWE");
+                        preparedStatement.setString(1, "SWE");
                 
                 try(ResultSet resultSet = preparedStatement.executeQuery()) {
                     
                     while (resultSet.next()) {
-                        System.out.println(resultSet.getInt("ID"));
-                        System.out.println(resultSet.getString("Name"));
-                        System.out.println(resultSet.getString("CountryCode"));
-                        System.out.println(resultSet.getString("District"));
-                        System.out.println(resultSet.getString("Population"));
+                        System.out.println(resultSet.getInt("ID") +"\n"+
+                                resultSet.getString("Name") +"\n"+
+                                resultSet.getString("CountryCode") +"\n"+
+                                resultSet.getString("District") +"\n"+
+                                resultSet.getString("Population"));
                         System.out.println();
                     }
                 }
@@ -88,13 +84,13 @@ public class CityDaoJDBC implements CityDao {
                 preparedStatement.setString(1, "Stockholm");
                 
                 try(ResultSet resultSet = preparedStatement.executeQuery()) {
-                    
+    
                     while (resultSet.next()) {
-                        System.out.println(resultSet.getInt("ID"));
-                        System.out.println(resultSet.getString("Name"));
-                        System.out.println(resultSet.getString("CountryCode"));
-                        System.out.println(resultSet.getString("District"));
-                        System.out.println(resultSet.getString("Population"));
+                        System.out.println(resultSet.getInt("ID") +"\n"+
+                                resultSet.getString("Name") +"\n"+
+                                resultSet.getString("CountryCode") +"\n"+
+                                resultSet.getString("District") +"\n"+
+                                resultSet.getString("Population"));
                         System.out.println();
                     }
                 }
@@ -118,13 +114,13 @@ public class CityDaoJDBC implements CityDao {
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
                 ) {
-            
+    
             while (resultSet.next()) {
-                System.out.println(resultSet.getInt("ID"));
-                System.out.println(resultSet.getString("Name"));
-                System.out.println(resultSet.getString("CountryCode"));
-                System.out.println(resultSet.getString("District"));
-                System.out.println(resultSet.getString("Population"));
+                System.out.println(resultSet.getInt("ID") +"\n"+
+                        resultSet.getString("Name") +"\n"+
+                        resultSet.getString("CountryCode") +"\n"+
+                        resultSet.getString("District") +"\n"+
+                        resultSet.getString("Population"));
                 System.out.println();
             }
             
@@ -171,7 +167,6 @@ public class CityDaoJDBC implements CityDao {
     
         @Override
         public City update ( City city ){
-            int cityId = 4090;
             String query = "update city set Population = 20 where id = ?";
             
             try (
@@ -179,7 +174,7 @@ public class CityDaoJDBC implements CityDao {
                     PreparedStatement preparedStatement = connection.prepareStatement(query);
                 ) {
                 
-                preparedStatement.setInt(1, cityId);
+                preparedStatement.setInt(1, city.getId());
     
                 int rowAffected = preparedStatement.executeUpdate();
                 System.out.println(rowAffected + " row updated!");
@@ -193,7 +188,6 @@ public class CityDaoJDBC implements CityDao {
         
         @Override
         public City delete ( City city ){
-        int cityId = 4091;
         String query = "delete from city where id = ?";
         
         try(
@@ -201,7 +195,7 @@ public class CityDaoJDBC implements CityDao {
                 PreparedStatement preparedStatement = connection.prepareStatement(query)
         ) {
     
-            preparedStatement.setInt(1, cityId);
+            preparedStatement.setInt(1, city.getId());
     
             int rowAffected = preparedStatement.executeUpdate();
             System.out.println(rowAffected + " row deleted!");

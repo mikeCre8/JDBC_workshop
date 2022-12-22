@@ -8,6 +8,7 @@ public class City {
     private String district;
     private int population;
     
+    public City(){}
     public City( Integer id, String name, String code, String district, int population ) {
         this.id = id;
         this.name = name;
