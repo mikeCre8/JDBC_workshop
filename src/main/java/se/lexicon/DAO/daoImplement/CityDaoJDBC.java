@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CityDaoJDBC implements CityDao {
     
-    public CityDaoJDBC() throws DBConnectionException {
+    public CityDaoJDBC() {
     }
     
         @Override
@@ -135,7 +135,7 @@ public class CityDaoJDBC implements CityDao {
         
         return list;
     }
-//        Todo add
+
         @Override
         public City add ( City city ){
             System.out.println("city = " + city);
@@ -146,10 +146,10 @@ public class CityDaoJDBC implements CityDao {
                 Connection connection = MySQLConnection.getConnection();
                 PreparedStatement preparedStatementCity = connection.prepareStatement(queryCity, Statement.RETURN_GENERATED_KEYS);
         ) {
-            preparedStatementCity.setString(1, "Test_Name");
-            preparedStatementCity.setString(2, "NLD");
-            preparedStatementCity.setString(3, "Test_District");
-            preparedStatementCity.setInt(4, 10);
+            preparedStatementCity.setString(1, city.getName());
+            preparedStatementCity.setString(2, city.getCode());
+            preparedStatementCity.setString(3, city.getDistrict());
+            preparedStatementCity.setInt(4, city.getPopulation());
             
             int newCity = preparedStatementCity.executeUpdate();
             System.out.println(newCity + " row added");
